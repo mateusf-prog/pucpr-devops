@@ -9,12 +9,19 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+
       - name: Python Lint Code Scanning Action
         uses: advanced-security/python-lint-code-scanning-action@v1.1.2
         with:
           linter: pylint
 
-
+      - name: Simulando Continuous Delivery
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-project.zip
+          path: |
+               CalculadoraImc.zip
+               README.md
 
   deploy:
     runs-on: ubuntu-latest
@@ -23,5 +30,6 @@ jobs:
       - uses: actions/download-artifact@v5
         with:
           name: my-project.zip
+
       - name: Display structure of downloaded files
         run: ls -R
